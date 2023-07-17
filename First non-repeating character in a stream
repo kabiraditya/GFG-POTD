@@ -1,0 +1,22 @@
+from collections import defaultdict, deque
+class Solution:
+	def FirstNonRepeating(self, A):
+		# Code here
+		count = defaultdict(int)
+        queue = deque()
+        result = ""
+
+        for c in A:
+            count[c] += 1
+            if count[c] == 1:
+                queue.append(c)
+
+            while queue and count[queue[0]] > 1:
+                queue.popleft()
+
+            if not queue:
+                result += "#"
+            else:
+                result += queue[0]
+
+        return result
